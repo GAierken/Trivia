@@ -3,9 +3,9 @@ import React, {useEffect} from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
+
 import {Container} from 'semantic-ui-react'
 import Welcome from './Components/Welcome'
 import Question from './Components/Question'
@@ -20,6 +20,7 @@ function App(props) {
        props.requestSetQuestions(Problems)
   }
   )
+  
   return (
     <Router>
       <React.Fragment>

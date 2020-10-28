@@ -25,6 +25,7 @@ function* newUserName(){
 
 export default function* rootSaga(){
     yield fork(fetchSaga)
+    yield fork(newUserName)
    
     
 }
