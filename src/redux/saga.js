@@ -1,6 +1,6 @@
-import {  put, fork, takeLatest } from "redux-saga/effects";
+import { put, fork, takeLatest } from "redux-saga/effects";
 import {REQUEST_SET_QUESTIONS, setQuestions, REQUEST_SET_USERNAME, setUserName, REQUEST_SET_SCORE, setScore } from './actions'
-// import Problems from '../Apprentice_TandemFor400_Data.json'
+
 
 function* getQuestions(action) {
 
