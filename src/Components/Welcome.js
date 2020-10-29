@@ -14,8 +14,12 @@ function Welcome(props) {
     }
     
     const handleOnClick = () => {
-
-        props.requestSetUsername(username)
+        if(username === ""){
+            alert("Username can't be blank")
+        }else{
+            props.requestSetUsername(username)
+        }
+        
 
     }
     return (

@@ -8,7 +8,7 @@ import {
 
 import {Container} from 'semantic-ui-react'
 import Welcome from './Components/Welcome'
-import Question from './Components/Question'
+import Question from './Components/QuestionContainer'
 import {requestSetQuestions} from './redux/actions'
 import { connect } from 'react-redux'
 
