@@ -26,7 +26,7 @@ function Welcome(props) {
         <React.Fragment>
             <Container style={{"marginTop": 50}}>
                 <Header as="h1" color="blue" textAlign="center" inverted size="huge"> Welcome to your Tandem Trivia Experience</Header>  
-                <Form size="large" inline required>
+                <Form size="large"  required>
                     <Form.Input onChange = {handleOnChange}fluid placeholder="name" label="Please Enter Your Name To Start"/>
                     <Link to='/questions'><Form.Button color="blue" inverted onClick={handleOnClick}>Submit</Form.Button></Link>
                 </Form> 
