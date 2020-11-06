@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Form, Checkbox } from 'semantic-ui-react'
+import { Form, Checkbox, Segment } from 'semantic-ui-react'
 import swal from 'sweetalert';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -18,7 +18,8 @@ export default class CheckboxExampleRadioGroup extends Component {
        
        return this.props.answers.map((ans) => {
          return (
-          <Form.Field key={uuidv4()}>
+           <Segment key={uuidv4()}>
+             <Form.Field key={uuidv4()}>
               <Checkbox
                 radio
                 label={ans}
@@ -27,7 +28,9 @@ export default class CheckboxExampleRadioGroup extends Component {
                 checked={this.state.value === ans}
                 onChange={this.handleChange}
               />
-         </Form.Field>
+             </Form.Field>
+           </Segment>
+          
          )
        }
        )
@@ -68,8 +71,14 @@ export default class CheckboxExampleRadioGroup extends Component {
         
     return (
       <Form>
-         {this.formFieldsGenerator()}
-         <Form.Button onClick={this.handleSubmit}>Submit Your Answer</Form.Button> 
+        <Segment.Group>
+          {this.formFieldsGenerator()}
+          <Segment>
+              <Form.Button onClick={this.handleSubmit}>Submit Your Answer</Form.Button> 
+          </Segment>
+        </Segment.Group>
+         
+         
       </Form>
     )
   }
