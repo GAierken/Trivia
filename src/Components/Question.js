@@ -1,20 +1,31 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import {connect} from 'react-redux'
+import { Segment } from 'semantic-ui-react'
 import RadioCheckbox from './RadioCheckbox'
 
 function Question(props) {
 
-    let questions1 = new Array(10)
-    let questions2 = new Array(10)
+    const [question1, setQ1] =  useState([])
+    const [question2, setQ2] =  useState([])
+    useEffect(() => {
+        
+     let q1 = new Array(10)
 
-    for(let i = 0; i < questions1.length; i++){
-        questions1[i] = props.questions[i]
-    }
-    
-    
-    for(let i = 0; i < questions2.length; i++){
-        questions2[i] = props.questions[i + 10]
-    }
+        for(let i = 0; i < q1.length; i++){
+            q1[i] = props.questions[i]
+        }
+        
+     let q2 = new Array(10)
+        for(let i = 0; i < q2.length; i++){
+            q2[i] = props.questions[i + 10]
+        }
+
+    setQ1(q1)
+    setQ2(q2)
+
+    }, []
+    )
+   
    
     let hash = {}
 
@@ -26,12 +37,21 @@ function Question(props) {
    let allAnswers = [...hash[2].incorrect, hash[2].correct]
 
 
+   const questionGenerator = () => {
+            console.log(question1, question2)
+   }
 
    
     return (
         <div>
-            {hash[2].question}
-            <RadioCheckbox answers={allAnswers} correct={hash[2].correct}/>
+            <Segment.Group raised>
+              <Segment padded="very">
+                {questionGenerator()}
+              </Segment>
+              <RadioCheckbox answers={allAnswers} correct={hash[2].correct}/>
+            </Segment.Group>
+            
+            
         </div>
     )
 }

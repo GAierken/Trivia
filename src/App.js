@@ -8,18 +8,67 @@ import {
 
 import {Container} from 'semantic-ui-react'
 import Welcome from './Components/Welcome'
-import Question from './Components/QuestionContainer'
+// import Question from './Components/QuestionContainer'
 import {requestSetQuestions} from './redux/actions'
 import { connect } from 'react-redux'
+import Quiz from 'react-quiz-component';
 
 
 function App(props) {
 
 
   useEffect(() => {
-       props.requestSetQuestions(Problems)
-  }
+       let quiz = {
+        "quizTitle": "Tandem Trivia",
+        "questions": [],
+        "appLocale": {
+          "landingHeaderText": "<questionLength> Questions",
+          "question": "Question",
+          "startQuizBtn": "Start Quiz",
+          "resultFilterAll": "All",
+          "resultFilterCorrect": "Correct",
+          "resultFilterIncorrect": "Incorrect",
+          "nextQuestionBtn": "Next",
+          "resultPageHeaderText": "You have completed the quiz. You got <correctIndexLength> out of <questionLength> questions."
+        } 
+       }
+       /**
+        * "question": "How can you access the state of a component from inside of a member function?",
+      "questionType": "text",
+      "answers": [
+        "this.getState()",
+        "this.prototype.stateValue",
+        "this.state",
+        "this.values"
+      ],
+      "correctAnswer": "3",
+      "messageForCorrectAnswer": "Correct answer. Good job.",
+      "messageForIncorrectAnswer": "Incorrect answer. Please try again."
+        */
+
+        let newArr = Problems.slice(0,10).map((ele) => {
+             let allAnswers = [...ele.incorrect, ele.correct]
+             let correct = allAnswers.length === 4? "4" : "3"
+            return {
+              "question": ele.question,
+              "questionType": "text",
+              "answers": allAnswers,
+              "correctAnswer": correct,
+              "messageForCorrectAnswer": "Correct answer. Good job.",
+              "messageForIncorrectAnswer": `Incorrect answer. The correct answer is ${ele.correct}`,
+              "explanation": `The answer is ${ele.correct}`,
+              "point": 1
+            }
+        })
+        quiz.questions = newArr
+    
+       props.requestSetQuestions(quiz)
+  }, []
   )
+
+  const onCompleteAction = () => {
+    console.log("completed")
+  }
   
   return (
     <Router>
@@ -32,7 +81,9 @@ function App(props) {
             <Welcome />
           </Route>
           <Route exact path="/questions">
-            <Question />
+            <Container>
+              <Quiz quiz={props.questions} shuffle={true} showInstantFeedback={true} onComplete={onCompleteAction}/>
+            </Container>
           </Route>
           
         </Switch>
